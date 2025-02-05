@@ -27,7 +27,6 @@ export default function Home({
   recoBooks
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   // 아래 콘솔 값은 서버에서 한번, 브라우저에서 한번, 총 2번 호출됨
-  //
 
   return (
     <div className={style.container}>
