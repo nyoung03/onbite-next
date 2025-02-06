@@ -27,10 +27,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/book/[id]": [
+    "/search": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/book/[id].js"
+      "static/chunks/pages/search.js"
     ]
   },
   "ampFirstPages": []
