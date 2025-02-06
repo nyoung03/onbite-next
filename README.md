@@ -1,40 +1,37 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Page Router의 장점
 
-First, run the development server:
+1. 파일 시스템 기반의 간편한 페이지 라우팅 제공
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 파일 안의 index.tsx 파일로 페이지 라우팅 처리
+- 동적 경로 (Dynamic Routes)
+  - [id].tsx
+  - [...id].tsx => catch all segment
+  - [[...id]].tsx => optional catch all segment
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 다양한 방식의 사전 렌더링 제공
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- 유저가 서버에 접속을 요청하면 서버가 js를 실행하고 렌더링 된 html을 브라우저에 전달하여 화면에 렌더링
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. 서버사이드 렌더링 (SSR)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   - 요청이 들어올 때 마다 사전 렌더링을 진행 함
+   - 최신 데이터 보장, 서버-백엔드 서버의 딜레이가 있을 시 문제 발생
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. 정적 사이트 생성 (SSG)
 
-## Learn More
+   - 빌드 타임에 미리 페이지 정적으로 사전 렌더링 해 둠
+   - 서버-백엔드 서버의 딜레이가 있어도 빌드 타임에 일어나는 일이기 때문에 사용자의 요청에는 완성된 페이지 제공
+   - 빌드 타임 이후에는 페이지 재생성하지 않음, 최신 데이터 방영 X
 
-To learn more about Next.js, take a look at the following resources:
+3. 증분 정적 재생성 (ISR)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - SSG 페이지 일정 시간마다 재생성
+   - Revalidate 요청으로 즉각적 생성도 가능
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Page Router의 단점
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. 페이지병 레이아웃 설정이 번거롭다.
+2. 데이터 패칭이 페이지 컴포넌트에 집중된다.
+3. 불 필요한 컴포넌트들도 JS Bundle에 포함된다.
