@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 서버 컴포넌트의 등장
 
-## Getting Started
+- 서버에서 브라우저에 js bundle을 보낼때 모든 컴포넌트를 포함할 필요가 없다.
+- 결국 자바스크립트 번들의 용량이 커지고 이 번들을 불러오는데 시간도 오래 걸림 (TTI 까지 느려짐)
+- 서버측에서만 실행되는 컴포넌트들은 제외하고 브라우저에 전달
 
-First, run the development server:
+1. 서버 컴포넌트 : 서버측에서 사전 렌더링을 진행할 때 딱 한번만 실행됨
+2. 클라이언트 컴포넌트 : 사전 렌더링 진행될 때 한번, 하이드레이션 진행할 때 한번 총 2번 실행됨
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+> 페이지의 대부분을 서버 컴포넌트로 구성할 것을 권장
+> 클라이언트 컴포넌트는 꼭 필요한 경우에만 사용할 것
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 주의사항
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. 서버 컴포넌트에는 브라우저에서 실행될 코드가 포함되면 안된다.
+2. 클라이언트 컴포넌트는 클라이언트에서만 실행되지 않는다.
+3. 클라이언트 컴포넌트에서 서버 컴포넌트를 import 할 수 없다. (서버 컴포넌트를 자동으로 클라이언트 컴포넌트로 전환시킴)
+4. 서버 컴포넌트에서 클라이언트 컴포넌트에게 직렬화 되지 않는 props는 전달 불가하다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 직렬화 : 객체, 배열, 클래스 등의 데이터를 단순한 형태로 변환하는 과정
+- 단, 자바스크립트의 함수는 직렬화 불가
+- 코드블럭을 포함한 특수 형태
+- 클로저나 렉시컬 스코프등 다양한 환경 의존
