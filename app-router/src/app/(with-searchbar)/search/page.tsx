@@ -10,5 +10,5 @@ export default async function Page({
   const { q } = await searchParams;
   console.log(q);
 
-  return <div>search page</div>;
+  return <div>search page {q}</div>;
 }
