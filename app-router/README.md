@@ -21,3 +21,9 @@
 - 단, 자바스크립트의 함수는 직렬화 불가
 - 코드블럭을 포함한 특수 형태
 - 클로저나 렉시컬 스코프등 다양한 환경 의존
+
+## Navigating 페이지 이동
+
+- Client Side Rendering 방식으로 처리 (react와 동일)
+- Server Components 기능 추가
+  - 페이지 이동, 프리패칭 시에 nextjs 서버가 js번들만 전달하는 것이 아니고 RSC payload도 함께 전달

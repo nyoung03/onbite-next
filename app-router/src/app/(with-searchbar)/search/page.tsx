@@ -1,4 +1,7 @@
 // 서버 컴포넌트이기 때문에 async 사용 가능
+
+import ClientComponent from "@/components/client-component";
+
 // 서버 컴포넌트는 서버측에서 사전 렌더링을 위해 한번만 실행 => 비동기적으로 실행되어도 문제X
 export default async function Page({
   searchParams
@@ -10,5 +13,12 @@ export default async function Page({
   const { q } = await searchParams;
   console.log(q);
 
-  return <div>search page {q}</div>;
+  return (
+    <div>
+      search page {q}
+      <ClientComponent>
+        <></>
+      </ClientComponent>
+    </div>
+  );
 }
