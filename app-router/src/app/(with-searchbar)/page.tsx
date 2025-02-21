@@ -2,7 +2,7 @@ import AnimeItem from "@/components/anime-item";
 import style from "./page.module.css";
 import { AnimeData } from "@/types";
 
-const getSeason = () => {
+export function getSeason() {
   const month = new Date().getMonth() + 1;
 
   if (month >= 3 && month <= 6) {
@@ -14,18 +14,12 @@ const getSeason = () => {
   } else {
     return "winter";
   }
-};
+}
 
 async function AllAnime() {
   const res = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_API_SERVER_URL
-    }/seasons/2024/${getSeason()}?sfw&limit=10`,
-    // 데이터 캐시
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/seasons/2024/${getSeason()}?sfw`,
     { cache: "force-cache" }
-    // { cache: "no-cache" }
-    // { next: { revalidate: 3 } }
-    // { next: { tage: ['a'] } }
   );
 
   if (!res.ok) {
