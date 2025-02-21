@@ -3,7 +3,7 @@ import Link from "next/link";
 import style from "./layout.module.css";
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -12,7 +12,7 @@ export default function RootLayout({
       <body>
         <div className={style.container}>
           <header>
-            <Link href={"/"}>📚 ONEBITE BOOKS</Link>
+            <Link href={"/"}>📚 ONEBITE Anime</Link>
           </header>
           <main>{children}</main>
           <footer>제작 @winterlood</footer>

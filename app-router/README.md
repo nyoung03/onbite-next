@@ -27,3 +27,8 @@
 - Client Side Rendering 방식으로 처리 (react와 동일)
 - Server Components 기능 추가
   - 페이지 이동, 프리패칭 시에 nextjs 서버가 js번들만 전달하는 것이 아니고 RSC payload도 함께 전달
+
+## 데이터 페칭
+
+- 브라우저에서 동작하지 않는 서버 컴포넌트에 async 사용 가능 => getServerSideProps, getStaticProps를 대체
+- 데이터는 필요한 곳에서 직접 불러와라
