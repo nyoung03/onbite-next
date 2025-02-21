@@ -20,7 +20,12 @@ async function AllAnime() {
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_API_SERVER_URL
-    }/seasons/2024/${getSeason()}?sfw&limit=10`
+    }/seasons/2024/${getSeason()}?sfw&limit=10`,
+    // 데이터 캐시
+    { cache: "force-cache" }
+    // { cache: "no-cache" }
+    // { next: { revalidate: 3 } }
+    // { next: { tage: ['a'] } }
   );
 
   if (!res.ok) {
@@ -39,7 +44,8 @@ async function AllAnime() {
 
 async function RecoBooks() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/top/anime?sfw&limit=5`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/top/anime?sfw&limit=5`,
+    { next: { revalidate: 3 } }
   );
 
   if (!res.ok) {
