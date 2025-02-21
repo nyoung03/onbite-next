@@ -19,7 +19,10 @@ export default function AnimeItem({
         <br />
         <div className={style.author}>
           {genres.map((i) => (
-            <div className={style.genre}> {i.name} |</div>
+            <div className={style.genre} key={i.name}>
+              {" "}
+              {i.name} |
+            </div>
           ))}
         </div>
       </div>

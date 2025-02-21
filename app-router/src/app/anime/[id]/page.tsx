@@ -27,7 +27,10 @@ export default async function Page({
       <div className={style.subTitle}>{score}</div>
       <div className={style.author}>
         {genres.map((i: { name: string }) => (
-          <div className={style.genre}> {i.name} |</div>
+          <div className={style.genre} key={i.name}>
+            {" "}
+            {i.name} |
+          </div>
         ))}
       </div>
       <div className={style.description}>{synopsis}</div>
