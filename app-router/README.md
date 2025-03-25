@@ -44,3 +44,20 @@
 
 - 중복된 API의 요청을 하나의 요청으로 합쳐주는 자동 기능
 - 하나의 페이지를 렌더링 하는 동안에 중복을 캐싱하기 위해 존재 => 렌더링이 종료되면 모든 캐시 즉시 소멸
+
+## Full Route Cache
+
+- next 서버측에서 빌드 타임에 특정 페이지의 렌더링 결과를 캐싱하는 기능 (ssg와 유사)
+- next는 자동으로 페이지에 따라 정적 스테틱 페이지와 동적 다이나믹 페이지로 나뉨
+  - Dynamic page : 특정 페이지가 접속 요청을 받을 때 마다 매번 변화가 생기거나, 데이터가 달라지는 경우
+    1. 캐시되지 않는 Data Fetching을 사용할 경우 (서버 컴포넌트만 해당)
+    2. 동적 함수(쿠키, 헤더, 쿼리스트링)을 사용하는 컴포넌트가 있을 때
+  - Static page : Dynamic page가 아니면 모두 기본적으로 설정
+    |동적 함수|데이터 캐시|페이지 분류|
+    |------|---|---|
+    |YES|NO|Dynamic page|
+    |YES|YES|Dynamic page|
+    |NO|NO|Dynamic page|
+    |NO|YES|Static page|
+  - Static page만 Full Route Cache 가능
+  - revalidate 가능 (isr 같은 방식)

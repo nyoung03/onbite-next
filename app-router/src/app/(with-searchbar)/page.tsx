@@ -1,20 +1,7 @@
 import AnimeItem from "@/components/anime-item";
 import style from "./page.module.css";
 import { AnimeData } from "@/types";
-
-export function getSeason() {
-  const month = new Date().getMonth() + 1;
-
-  if (month >= 3 && month <= 6) {
-    return "spring";
-  } else if (month >= 7 && month <= 8) {
-    return "summer";
-  } else if (month >= 9 && month <= 11) {
-    return "fall";
-  } else {
-    return "winter";
-  }
-}
+import { getSeason } from "@/util/getSeason";
 
 async function AllAnime() {
   const res = await fetch(

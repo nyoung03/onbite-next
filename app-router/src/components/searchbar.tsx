@@ -5,6 +5,7 @@ import style from "./searchbar.module.css";
 
 export default function Searchbar() {
   const router = useRouter();
+  // useSearchParams => 쿼리스트링 값을 꺼내오기 때문에 (비동기 Hook)
   const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
 
