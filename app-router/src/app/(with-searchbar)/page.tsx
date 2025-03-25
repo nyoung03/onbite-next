@@ -2,10 +2,13 @@ import AnimeItem from "@/components/anime-item";
 import style from "./page.module.css";
 import { AnimeData } from "@/types";
 import { getSeason } from "@/util/getSeason";
+import { getYear } from "@/util/getYear";
 
 async function AllAnime() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/seasons/2024/${getSeason()}?sfw`,
+    `${
+      process.env.NEXT_PUBLIC_API_SERVER_URL
+    }/seasons/${getYear()}/${getSeason()}?sfw`,
     { cache: "force-cache" }
   );
 
@@ -23,7 +26,7 @@ async function AllAnime() {
   );
 }
 
-async function RecoBooks() {
+async function Top5Books() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/top/anime?sfw&limit=5`,
     { next: { revalidate: 3 } }
@@ -49,7 +52,7 @@ export default function Home() {
     <div className={style.container}>
       <section>
         <h3>랭킹 TOP5 애니</h3>
-        <RecoBooks />
+        <Top5Books />
       </section>
       <section>
         <h3>{getSeason().toUpperCase()} Season 애니</h3>

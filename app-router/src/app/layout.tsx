@@ -3,15 +3,16 @@ import Link from "next/link";
 import style from "./layout.module.css";
 import { AnimeData } from "@/types";
 import { getSeason } from "@/util/getSeason";
+import { getYear } from "@/util/getYear";
 
 async function Footer() {
   // 아래 fetch 메서드는 자동으로 no store 옵션을 갖는다
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/seasons/2024/${getSeason()}?sfw`,
+    `${
+      process.env.NEXT_PUBLIC_API_SERVER_URL
+    }/seasons/${getYear()}/${getSeason()}?sfw`,
     { cache: "force-cache" }
   );
-
-  console.log(getSeason(), "getSeason()");
 
   if (!res.ok) {
     return <footer>제작 @winterlood</footer>;
