@@ -4,6 +4,15 @@ import { AnimeData } from "@/types";
 import { getSeason } from "@/util/getSeason";
 import { getYear } from "@/util/getYear";
 
+// 특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정
+// 약간 막무가내로 무조건 설정됨
+// 특별한 상황이 아니면 권장되지 않는다.
+// export const dynamic = "auto";
+// 1. auto : 기본값, 아무것도 강제하지 않음
+// 2. force-dynamic : 페이지를 강제로 Dynamic 페이지로 설정
+// 3. force-static : 페이지를 강제로 Static 페이지로 설정
+// 4. error : 페이지를 강제로 Static 페이지로 설정 (설정하면 안되는 이유가 있다면 빌드시 에러발생)
+
 async function AllAnime() {
   const res = await fetch(
     `${
