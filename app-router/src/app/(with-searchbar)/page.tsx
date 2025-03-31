@@ -3,6 +3,7 @@ import style from "./page.module.css";
 import { AnimeData } from "@/types";
 import { getSeason } from "@/util/getSeason";
 import { getYear } from "@/util/getYear";
+import { Suspense } from "react";
 
 // 특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정
 // 약간 막무가내로 무조건 설정됨
@@ -61,11 +62,15 @@ export default function Home() {
     <div className={style.container}>
       <section>
         <h3>랭킹 TOP5 애니</h3>
-        <Top5Books />
+        <Suspense fallback={<div>Top5Books...</div>}>
+          <Top5Books />
+        </Suspense>
       </section>
       <section>
         <h3>{getSeason().toUpperCase()} Season 애니</h3>
-        <AllAnime />
+        <Suspense fallback={<div>AllAnime...</div>}>
+          <AllAnime />
+        </Suspense>
       </section>
     </div>
   );

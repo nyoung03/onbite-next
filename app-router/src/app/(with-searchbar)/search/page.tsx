@@ -1,13 +1,8 @@
 import AnimeItem from "@/components/anime-item";
 import { AnimeData } from "@/types";
+import { Suspense } from "react";
 
-export default async function Page({
-  searchParams
-}: {
-  searchParams: Promise<{ q: string }>;
-}) {
-  const { q } = await searchParams;
-
+async function SearchResult({ q }: { q: string }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/anime?sfw&min_score=6&limit=10&q=${q}`,
     { cache: "force-cache" }
@@ -29,5 +24,19 @@ export default async function Page({
         <AnimeItem key={anime.mal_id} {...anime} />
       ))}
     </div>
+  );
+}
+
+export default async function Page({
+  searchParams
+}: {
+  searchParams: { q?: string };
+}) {
+  return (
+    // 미완성, 미결
+    // key에 따라 새롭게 컴포넌트 그리기
+    <Suspense key={searchParams.q} fallback={<div>Loading...</div>}>
+      <SearchResult q={searchParams.q || ""} />
+    </Suspense>
   );
 }
