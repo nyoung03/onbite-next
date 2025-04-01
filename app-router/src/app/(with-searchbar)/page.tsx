@@ -4,6 +4,7 @@ import { AnimeData } from "@/types";
 import { getSeason } from "@/util/getSeason";
 import { getYear } from "@/util/getYear";
 import { Suspense } from "react";
+import AnimeListSkeleton from "@/components/skeleton/anime-list-skeleton";
 
 // 특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정
 // 약간 막무가내로 무조건 설정됨
@@ -62,13 +63,13 @@ export default function Home() {
     <div className={style.container}>
       <section>
         <h3>랭킹 TOP5 애니</h3>
-        <Suspense fallback={<div>Top5Books...</div>}>
+        <Suspense fallback={<AnimeListSkeleton count={3} />}>
           <Top5Books />
         </Suspense>
       </section>
       <section>
         <h3>{getSeason().toUpperCase()} Season 애니</h3>
-        <Suspense fallback={<div>AllAnime...</div>}>
+        <Suspense fallback={<AnimeListSkeleton count={5} />}>
           <AllAnime />
         </Suspense>
       </section>

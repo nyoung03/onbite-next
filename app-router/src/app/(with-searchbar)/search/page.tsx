@@ -30,13 +30,15 @@ async function SearchResult({ q }: { q: string }) {
 export default async function Page({
   searchParams
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q: string }>;
 }) {
+  const { q } = await searchParams;
+
   return (
     // 미완성, 미결
     // key에 따라 새롭게 컴포넌트 그리기
-    <Suspense key={searchParams.q} fallback={<div>Loading...</div>}>
-      <SearchResult q={searchParams.q || ""} />
+    <Suspense key={q} fallback={<div>Loading...</div>}>
+      <SearchResult q={q} />
     </Suspense>
   );
 }
