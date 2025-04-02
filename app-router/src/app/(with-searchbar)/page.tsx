@@ -5,6 +5,7 @@ import { getSeason } from "@/util/getSeason";
 import { getYear } from "@/util/getYear";
 import { Suspense } from "react";
 import AnimeListSkeleton from "@/components/skeleton/anime-list-skeleton";
+import { delay } from "@/util/delay";
 
 // 특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정
 // 약간 막무가내로 무조건 설정됨
@@ -16,6 +17,7 @@ import AnimeListSkeleton from "@/components/skeleton/anime-list-skeleton";
 // 4. error : 페이지를 강제로 Static 페이지로 설정 (설정하면 안되는 이유가 있다면 빌드시 에러발생)
 
 async function AllAnime() {
+  await delay(3000);
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_API_SERVER_URL
@@ -38,6 +40,7 @@ async function AllAnime() {
 }
 
 async function Top5Books() {
+  await delay(5000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/top/anime?sfw&limit=5`,
     { next: { revalidate: 3 } }
