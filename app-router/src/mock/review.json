@@ -1,0 +1,30 @@
+[
+  {
+    "id": 7,
+    "content": "굳굳굳",
+    "author": "개미1",
+    "createdAt": "Wed Apr 02 2025 18:11:40 GMT+0900",
+    "bookId": 52991
+  },
+  {
+    "id": 8,
+    "content": "굳굳굳굳",
+    "author": "개미2",
+    "createdAt": "Wed Apr 02 2025 18:11:40 GMT+0900",
+    "bookId": 52991
+  },
+  {
+    "id": 9,
+    "content": "굳굳굳굳굳",
+    "author": "개미3",
+    "createdAt": "Wed Apr 02 2025 18:11:40 GMT+0900",
+    "bookId": 52991
+  },
+  {
+    "id": 10,
+    "content": "오액",
+    "author": "개미4",
+    "createdAt": "Wed Apr 02 2025 18:11:40 GMT+0900",
+    "bookId": 52991
+  }
+]

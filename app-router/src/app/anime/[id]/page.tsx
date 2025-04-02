@@ -1,23 +1,15 @@
 import { notFound } from "next/navigation";
 import style from "./page.module.css";
+import { ReviewData } from "@/types";
+import ReviewItem from "@/components/review-item";
+import reviewList from "@/mock/review.json";
+import ReviewEditor from "@/components/review-editor";
 
-// generateStaticParams에 설정해둔 id 파라미터 외에 모두 다 404페이지로 보내고 싶을때
-// export const dynamicParams = false;
-
-// generateStaticParams 정적인 파라미터를 생성하는 함수
-// 아래의 3개 id 값의 페이지를 빌드타임에 정적으로 만든다.
-// 빌드 타임에 렌더링이 완료되어서 서버측에 풀라우트 캐시로써 잘 보관이 된다.
 export function generateStaticParams() {
-  // 문자열로만 명시 필요
-  // res와 같이 데이터 캐싱을 설정하지 않은 데이터 패칭이 있더라도 페이지가 스테틱 페이지로 강제 설정됨
   return [{ id: "52991" }, { id: "16498" }, { id: "25777" }];
 }
 
-type tProps = Promise<{ id: string | string[] }>;
-
-export default async function Page({ params }: { params: tProps }) {
-  const { id } = await params;
-
+async function BookDetail({ id }: { id: string }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/anime/${id}/full`
   );
@@ -35,7 +27,7 @@ export default async function Page({ params }: { params: tProps }) {
   const { mal_id, title_english, score, synopsis, genres, images } = data.data;
 
   return (
-    <div className={style.container}>
+    <section>
       <div
         className={style.cover_img_container}
         style={{ backgroundImage: `url('${images.jpg.image_url}')` }}
@@ -53,6 +45,41 @@ export default async function Page({ params }: { params: tProps }) {
         ))}
       </div>
       <div className={style.description}>{synopsis}</div>
+    </section>
+  );
+}
+
+async function ReviewList({ bookId }: { bookId: string }) {
+  // const res = await fetch(`/review/book/${bookId}`);
+
+  // if (!res.ok) {
+  //   throw new Error(`Review fetch failed : ${res.statusText}`);
+  // }
+
+  // const reviews: ReviewData[] = await res.json();
+
+  const reviews: ReviewData[] = reviewList;
+
+  return (
+    <section>
+      {reviews.map((i) => (
+        <ReviewItem key={i.id} {...i} />
+      ))}
+    </section>
+  );
+}
+
+type tProps = Promise<{ id: string }>;
+
+export default async function Page({ params }: { params: tProps }) {
+  const { id } = await params;
+
+  return (
+    // 아래의 자식 컴포넌트들이 모두 랜더링됨
+    <div className={style.container}>
+      <BookDetail id={id} />
+      <ReviewEditor bookId={id} />
+      <ReviewList bookId={id} />
     </div>
   );
 }
